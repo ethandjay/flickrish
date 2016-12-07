@@ -4,6 +4,8 @@ Creative Project Rubric: Python Flask
 
 Flickr emulator
 
+*ADD RUBRIC SUBMISSION 5*
+
 Can register user (5)
 Can login (5)
 Main page (15)
@@ -34,3 +36,5 @@ Usability (5)
 Creative Portion (20)
     Profile pictures
     Delete photos
+    Can block, unblock users from various templates
+        incl. block list, suppression of blocked users' photos in various templates

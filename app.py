@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 
 
-UPLOAD_FOLDER = '/Users/ethandjay/Documents/College/sophomore/330/fall2016-cp-ethan-jaynes-443837/uploads'
+UPLOAD_FOLDER = '/Users/ethandjay/Documents/College/sophomore/330/fall2016-cp-ethan-jaynes-443837/static'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)

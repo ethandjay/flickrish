@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-    <div><img   class="pageimg"  src="http://www.rd.com/wp-content/uploads/sites/2/2016/04/01-cat-wants-to-tell-you-laptop.jpg" alt="{{ picture.id }}"></div> <!-- CAT PIC PLACEHOLDER FOR IMG SERVER PATH /Users/ethandjay/Documents/College/sophomore/330/fall2016-cp-ethan-jaynes-443837/uploads/{{picture.id}} -->
+    <div><img class="pageimg"  src="/static/{{ picture.imgpath }}" alt="{{ picture.id }}"></div>
     <h2>{{picture.title}}</h2>
     <p>{{picture.description}}</p>
     <a download="{{ picture.id }} + '.jpg'" href="http://www.rd.com/wp-content/uploads/sites/2/2016/04/01-cat-wants-to-tell-you-laptop.jpg">Download</a><br>

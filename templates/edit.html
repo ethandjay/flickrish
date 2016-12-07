@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-    <div><img src="http://www.rd.com/wp-content/uploads/sites/2/2016/04/01-cat-wants-to-tell-you-laptop.jpg" alt="{{ picture.id }}"></div> <!-- CAT PIC PLACEHOLDER FOR IMG SERVER PATH /Users/ethandjay/Documents/College/sophomore/330/fall2016-cp-ethan-jaynes-443837/uploads/{{picture.id}} -->
+    <div><img class="pageimg" src="/static/{{ picture.imgpath }}" alt="{{ picture.id }}"></div>
     <form action="{{ url_for('doedit') }}"  method=post> 
       <dl>
         <input type="hidden" name="id" value="{{picture.id}}">

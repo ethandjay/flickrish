@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
 {% if user.profpicpath is not none %}
- <div><img style=width:150px src="/Users/ethandjay/Documents/College/sophomore/330/fall2016-cp-ethan-jaynes-443837/uploads/{{user.profpicpath}}" alt="{{ user.id|string+'_profile_picture' }}"></div>
+ <div><img style=width:150px src="/static/{{ user.profpicpath }}"  alt="{{ user.id|string+'_profile_picture' }}"></div>
 {% endif %}
 <h2>{{user.username}}</h2>
 {% if user.username==session['username'] %}
@@ -54,9 +54,9 @@
 {% if afterupload %}
   <p>File uploaded successfully.</p><a href="{{ url_for('show_entries') }}">Upload another.</a>
 {% endif %}
-{% if not imblocked and not user.username == session['session'] and not urblocked%}
+{% if not imblocked and not user.username == session['session'] and not urblocked %}
   {% for picture in pictures %}
-        <div class="item"><img src="/Users/ethandjay/Documents/College/sophomore/330/fall2016-cp-ethan-jaynes-443837/uploads/{{picture.imgpath}}" alt="{{ picture.id }}"></div>
+        <div class="item"><a href="{{ url_for('imagepagegen') + '?id=' + picture.id|string}}"><img class="pageimg" src="/static/{{ picture.imgpath }}" alt="{{ picture.id }}"></a></div>
   {% else %}
     <em>Unbelievable.  No photos here so far.</em>
   {% endfor %}
