@@ -123,6 +123,8 @@ def home():
         return redirect(url_for('login'))
     else:
         return redirect(url_for('show_entries'))
+    
+# Main page
 
 @app.route('/show_entries')
 def show_entries():
@@ -132,6 +134,7 @@ def show_entries():
     pictures.sort(key=lambda x: x.id, reverse=True)
     return render_template('show_entries.html', pictures=pictures, afterupload=False)
 
+# Login logic
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -144,6 +147,8 @@ def login():
                 return redirect(url_for('show_entries'))
         return render_template('login.html', error="Incorrect username or password")
     return render_template('login.html')
+
+# Register logic
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -158,10 +163,14 @@ def register():
         db.session.commit()
         
         return redirect(url_for('show_entries'))
+    
+    #Check if legal file
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+        
+# Image upload logic
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
@@ -194,10 +203,14 @@ def upload_file():
     flash("Something didn't work.")
     return render_template('show_entries.html', afterupload=True, pictures=pictures)
 
+# All user page logic
+
 @app.route('/allusers')
 def allusergen():
     users = User.query.all()
     return render_template('allusers.html', users=users)
+
+# User page logic
 
 @app.route('/userpage')
 def userpage():
@@ -235,6 +248,8 @@ def userpage():
         fwg = False
     return render_template('userpage.html', me=me, users=users, user=you, fwg=fwg, pictures=pictures, numFrs=numFollowers, numFng=numFollowing, numBlk = numBlocked, urblocked=urblocked, imblocked=imblocked)
 
+# Follow or unfollow user
+
 @app.route('/followdo', methods=['POST'])
 def followdo():
     me = User.query.filter_by(username=session['username']).first()
@@ -250,6 +265,8 @@ def followdo():
     if 'from_list' in request.form:
         return redirect(url_for('show_entries'))
     return redirect(url_for('userpage', user=you.username))
+
+# Block or unblock user
 
 @app.route('/blockdo', methods=['POST'])
 def blockdo():
@@ -275,6 +292,8 @@ def blockdo():
         flash(request.form['you'] + " successfully unblocked")
         return redirect(url_for('userpage', user=you.username))
 
+# Get follower list logic
+
 @app.route('/followersList', methods=['GET'])
 def followersListGen():
     you = User.query.filter_by(username=request.args['user']).first()
@@ -289,7 +308,8 @@ def followersListGen():
         else:
             followersListRecip[user.username] = False
     return render_template('followersList.html', followersList=followersList, followersListRecip=followersListRecip, currentUser=request.args['user'])
-        
+     
+     # Get following list logic   
     
 @app.route('/followingList', methods=['GET'])
 def followingListGen():
@@ -301,6 +321,8 @@ def followingListGen():
             followingList.append(user)
     return render_template('followingList.html', followingList=followingList, currentUser=request.args['user'])
 
+# Get block list logic
+
 @app.route('/blockedList', methods=['GET'])
 def blockedListGen():
     you = User.query.filter_by(username=request.args['user']).first()
@@ -311,21 +333,29 @@ def blockedListGen():
             blockedList.append(user)
     return render_template('blockedList.html', blockedList=blockedList, currentUser=request.args['user'])
 
+# Logout
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     flash('You were logged out')
     return redirect(url_for('home'))
 
+# Image page logic
+
 @app.route('/imagepage')
 def imagepagegen():
     picture = Picture.query.filter_by(id=request.args['id']).first()
     return render_template('imagepage.html', picture=picture)
 
+# Edit image data page redir
+
 @app.route('/edit')
 def editpic():
     picture = Picture.query.filter_by(id=request.args['id']).first()
     return render_template("edit.html", picture=picture)
+
+# Edit image data logic
 
 @app.route('/doedit', methods=['POST'])
 def doedit():
@@ -339,6 +369,8 @@ def doedit():
     db.session.commit()
     return render_template("imagepage.html", picture=newpic)
 
+# Delete image
+
 @app.route('/delete', methods=['GET'])
 def delete():
     pic = Picture.query.filter_by(id=request.args['id']).first()
@@ -346,6 +378,8 @@ def delete():
     db.session.commit()
     flash("Image successfully deleted")
     return redirect(url_for('show_entries'))
+
+# Upload profile picture
 
 @app.route('/uploadprof', methods=['GET', 'POST'])
 def uploadprof():
