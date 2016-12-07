@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+    <br>
+  {% for user in followersList %}
+    <a href="{{url_for('userpage', user=user.username)}}">{{user.username}}</a>
+    {% if currentUser==session['username'] %}
+    <form action="{{ url_for('followdo') }}"  method=post>
+    <input type="hidden" name="you" value="{{user.username}}">
+    {% if followersListRecip[user.username]==True %}
+    <input type="submit" name="action" value="Unfollow">
+    {% else %}
+    <input type="submit" name="action" value="Follow">
+    {% endif %}
+    </form>
+    {% endif %}
+    <br>
+  {% else %}
+    <em>There's nothing here.</em><br><br>
+  {% endfor %}
+  <a href="{{url_for('userpage', user=currentUser)}}">Back</a>
+{% endblock %}

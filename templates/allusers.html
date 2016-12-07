@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block body %}
+    <br>
+  {% for user in users %}
+    <a href="{{url_for('userpage', user=user.username)}}">{{user.username}}</a><br>
+  {% endfor %}
+{% endblock %}

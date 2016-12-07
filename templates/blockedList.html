@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+    <br>
+  {% for user in blockedList %}
+    <a href="{{url_for('userpage', user=user.username)}}">{{user.username}}</a>
+    <form action="{{ url_for('blockdo') }}"  method=post>
+    <input type="hidden" name="you" value="{{user.username}}">
+    <input type="submit" name="action" value="Unblock">
+    </form>
+    <br>
+  {% else %}
+    <em>There's nothing here.</em><br><br>
+  {% endfor %}
+  <a href="{{url_for('userpage', user=currentUser)}}">Back</a>
+{% endblock %}

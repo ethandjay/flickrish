@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div><img src="http://www.rd.com/wp-content/uploads/sites/2/2016/04/01-cat-wants-to-tell-you-laptop.jpg" alt="{{ picture.id }}"></div> <!-- CAT PIC PLACEHOLDER FOR IMG SERVER PATH /Users/ethandjay/Documents/College/sophomore/330/fall2016-cp-ethan-jaynes-443837/uploads/{{picture.id}} -->
+    <form action="{{ url_for('doedit') }}"  method=post> 
+      <dl>
+        <input type="hidden" name="id" value="{{picture.id}}">
+        <dt class="title">Title:
+        <dd><input type=text size=30 name=title>
+        <dt>Description:
+        <dd><textarea name=description rows=5 cols=40></textarea>
+        <dd><input type=submit value=Submit>
+      </dl>
+    </form>
+{% endblock %}

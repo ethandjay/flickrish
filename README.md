@@ -32,3 +32,5 @@ Usability (5)
     Site is easy to use and intuitive (3)
     Site is visually appealing (2)
 Creative Portion (20)
+    Profile pictures
+    Delete photos
