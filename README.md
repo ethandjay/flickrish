@@ -1,4 +1,4 @@
-Ethan Jaynes 443837
+Ethan Jaynes
 
 Creative Project Rubric: Python Flask
 
